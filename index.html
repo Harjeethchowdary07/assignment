@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediCare Pharmacy - Your Health, Our Priority</title>
+  <style>
+    /* ---------- Reset & Variables ---------- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #0a8f6a;
+      --primary-dark: #07694e;
+      --accent: #ff7a59;
+      --light: #f2faf7;
+      --dark: #1f2d2a;
+      --gray: #6b7c77;
+      --white: #ffffff;
+      --shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+      color: var(--dark);
+      line-height: 1.6;
+      background: var(--white);
+    }
+
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    .container { width: 90%; max-width: 1150px; margin: 0 auto; }
+    section { padding: 70px 0; }
+
+    .section-title { text-align: center; margin-bottom: 45px; }
+    .section-title h2 { font-size: 2rem; color: var(--primary-dark); }
+    .section-title p { color: var(--gray); margin-top: 8px; }
+    .section-title::after {
+      content: ""; display: block; width: 60px; height: 4px;
+      background: var(--accent); margin: 14px auto 0; border-radius: 4px;
+    }
+
+    .btn {
+      display: inline-block; padding: 12px 28px; border-radius: 30px;
+      font-weight: 600; border: 2px solid transparent; cursor: pointer;
+      transition: all 0.3s ease; font-size: 1rem;
+    }
+    .btn-primary { background: var(--accent); color: var(--white); }
+    .btn-primary:hover { background: #e8643f; transform: translateY(-2px); }
+    .btn-outline { border-color: var(--white); color: var(--white); }
+    .btn-outline:hover { background: var(--white); color: var(--primary-dark); }
+
+    /* ---------- Top Bar ---------- */
+    .topbar {
+      background: var(--primary-dark); color: var(--white);
+      font-size: 0.85rem; padding: 8px 0;
+    }
+    .topbar .container {
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px;
+    }
+
+    /* ---------- Navbar ---------- */
+    header {
+      background: var(--white); position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    }
+    .navbar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 0; flex-wrap: wrap; gap: 10px;
+    }
+    .logo { font-size: 1.6rem; font-weight: 800; color: var(--primary); }
+    .logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 26px; flex-wrap: wrap; }
+    .nav-links a {
+      font-weight: 600; color: var(--dark); padding: 6px 0;
+      border-bottom: 2px solid transparent; transition: 0.3s;
+    }
+    .nav-links a:hover { color: var(--primary); border-color: var(--primary); }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      background: linear-gradient(135deg, rgba(7,105,78,0.92), rgba(10,143,106,0.85)),
+                  repeating-linear-gradient(45deg, #0a8f6a 0 20px, #0b9a72 20px 40px);
+      color: var(--white); padding: 100px 0; text-align: center;
+    }
+    .hero h1 { font-size: 3rem; margin-bottom: 15px; line-height: 1.2; }
+    .hero p { font-size: 1.15rem; max-width: 620px; margin: 0 auto 30px; opacity: 0.95; }
+    .hero .btn { margin: 6px; }
+
+    /* ---------- Features strip ---------- */
+    .features { padding: 0; margin-top: -45px; position: relative; z-index: 5; }
+    .features-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;
+    }
+    .feature-box {
+      background: var(--white); padding: 25px 20px; text-align: center;
+      border-radius: 12px; box-shadow: var(--shadow); transition: 0.3s;
+    }
+    .feature-box:hover { transform: translateY(-6px); }
+    .feature-box .icon { font-size: 2.2rem; }
+    .feature-box h3 { margin: 8px 0 4px; color: var(--primary-dark); font-size: 1.1rem; }
+    .feature-box p { color: var(--gray); font-size: 0.92rem; }
+
+    /* ---------- Services ---------- */
+    .services { background: var(--light); }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;
+    }
+    .service-card {
+      background: var(--white); padding: 30px 25px; border-radius: 12px;
+      border-top: 4px solid var(--primary); box-shadow: var(--shadow); transition: 0.3s;
+    }
+    .service-card:hover { border-top-color: var(--accent); transform: translateY(-5px); }
+    .service-card .icon { font-size: 2.4rem; margin-bottom: 10px; }
+    .service-card h3 { color: var(--primary-dark); margin-bottom: 8px; }
+    .service-card p { color: var(--gray); font-size: 0.95rem; }
+
+    /* ---------- Products ---------- */
+    .products-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 25px;
+    }
+    .product-card {
+      background: var(--white); border-radius: 12px; overflow: hidden;
+      box-shadow: var(--shadow); transition: 0.3s; position: relative;
+    }
+    .product-card:hover { transform: translateY(-6px); }
+    .product-img {
+      height: 160px; display: flex; align-items: center; justify-content: center;
+      font-size: 4rem; background: var(--light);
+    }
+    .badge {
+      position: absolute; top: 12px; left: 12px; background: var(--accent);
+      color: var(--white); font-size: 0.75rem; font-weight: 700;
+      padding: 4px 10px; border-radius: 20px;
+    }
+    .product-info { padding: 18px; text-align: center; }
+    .product-info h4 { font-size: 1.05rem; margin-bottom: 4px; }
+    .product-info .category { color: var(--gray); font-size: 0.85rem; }
+    .price { margin: 10px 0; font-size: 1.2rem; font-weight: 700; color: var(--primary); }
+    .price del { color: var(--gray); font-weight: 400; font-size: 0.95rem; margin-left: 6px; }
+    .product-info .btn { padding: 8px 22px; font-size: 0.9rem; background: var(--primary); color: var(--white); }
+    .product-info .btn:hover { background: var(--primary-dark); }
+
+    /* ---------- Offer banner ---------- */
+    .offer {
+      background: linear-gradient(120deg, var(--accent), #ff9a6b);
+      color: var(--white); text-align: center; padding: 55px 0;
+    }
+    .offer h2 { font-size: 2.2rem; margin-bottom: 10px; }
+    .offer p { margin-bottom: 20px; font-size: 1.1rem; }
+    .offer .btn { background: var(--white); color: var(--accent); }
+    .offer .btn:hover { background: var(--dark); color: var(--white); }
+
+    /* ---------- About ---------- */
+    .about-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px; align-items: center;
+    }
+    .about-img {
+      background: var(--light); border-radius: 16px; height: 300px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 7rem; box-shadow: var(--shadow);
+    }
+    .about-text h2 { color: var(--primary-dark); margin-bottom: 12px; font-size: 1.9rem; }
+    .about-text p { color: var(--gray); margin-bottom: 14px; }
+    .about-text ul li { padding: 5px 0; }
+    .about-text ul li::before { content: "✔ "; color: var(--primary); font-weight: bold; }
+
+    /* ---------- Stats ---------- */
+    .stats { background: var(--primary-dark); color: var(--white); padding: 50px 0; }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px; text-align: center;
+    }
+    .stats-grid h3 { font-size: 2.4rem; color: #ffd9cc; }
+
+    /* ---------- Testimonials ---------- */
+    .testimonials { background: var(--light); }
+    .testi-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 25px;
+    }
+    .testi-card {
+      background: var(--white); padding: 28px; border-radius: 12px; box-shadow: var(--shadow);
+    }
+    .testi-card p { font-style: italic; color: var(--gray); margin-bottom: 14px; }
+    .testi-card h5 { color: var(--primary-dark); font-size: 1rem; }
+    .stars { color: #f5b301; margin-bottom: 8px; }
+
+    /* ---------- Contact ---------- */
+    .contact-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;
+    }
+    .contact-info h3 { color: var(--primary-dark); margin-bottom: 15px; }
+    .contact-info li { margin-bottom: 14px; color: var(--gray); }
+    .contact-info strong { color: var(--dark); }
+
+    form { display: flex; flex-direction: column; gap: 14px; }
+    form input, form select, form textarea {
+      padding: 12px 14px; border: 2px solid #dce8e4; border-radius: 8px;
+      font-size: 1rem; font-family: inherit; transition: 0.3s; width: 100%;
+    }
+    form input:focus, form select:focus, form textarea:focus {
+      outline: none; border-color: var(--primary);
+    }
+    form textarea { resize: vertical; min-height: 110px; }
+    form .btn { background: var(--primary); color: var(--white); border: none; }
+    form .btn:hover { background: var(--primary-dark); }
+
+    /* ---------- Footer ---------- */
+    footer { background: var(--dark); color: #c5d3ce; padding: 50px 0 0; }
+    .footer-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;
+    }
+    footer h4 { color: var(--white); margin-bottom: 14px; }
+    footer li { margin-bottom: 8px; }
+    footer a:hover { color: var(--accent); }
+    .copyright {
+      text-align: center; padding: 18px 0; margin-top: 35px;
+      border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem;
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 700px) {
+      .hero h1 { font-size: 2.1rem; }
+      .navbar { justify-content: center; }
+      .nav-links { justify-content: center; gap: 16px; }
+      .topbar .container { justify-content: center; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="topbar">
+    <div class="container">
+      <span>📞 Call Us: +91 98765 43210</span>
+      <span>🕘 Open Daily: 8:00 AM – 10:00 PM</span>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header>
+    <div class="container navbar">
+      <a href="#home" class="logo">Medi<span>Care</span> +</a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#testimonials">Reviews</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="container">
+      <h1>Your Health, Our Priority</h1>
+      <p>Genuine medicines, expert pharmacists and fast home delivery — everything you need for a healthier life, all in one place.</p>
+      <a href="#products" class="btn btn-primary">Shop Medicines</a>
+      <a href="#contact" class="btn btn-outline">Upload Prescription</a>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <div class="container features-grid">
+      <div class="feature-box">
+        <div class="icon">🚚</div>
+        <h3>Free Home Delivery</h3>
+        <p>On all orders above ₹499</p>
+      </div>
+      <div class="feature-box">
+        <div class="icon">✅</div>
+        <h3>100% Genuine</h3>
+        <p>Sourced from licensed distributors</p>
+      </div>
+      <div class="feature-box">
+        <div class="icon">👨‍⚕️</div>
+        <h3>Expert Advice</h3>
+        <p>Qualified pharmacists on call</p>
+      </div>
+      <div class="feature-box">
+        <div class="icon">⏰</div>
+        <h3>24/7 Support</h3>
+        <p>Help whenever you need it</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-title">
+        <h2>Our Services</h2>
+        <p>Complete pharmacy care for you and your family</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="icon">💊</div>
+          <h3>Prescription Medicines</h3>
+          <p>Get your doctor-prescribed medicines filled quickly and accurately by our licensed pharmacists.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">🩺</div>
+          <h3>Health Check-ups</h3>
+          <p>Free blood pressure, sugar and BMI checks available at our store every day.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">🏠</div>
+          <h3>Home Delivery</h3>
+          <p>Order online or by phone and receive your medicines at your doorstep within hours.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">💉</div>
+          <h3>Vaccination</h3>
+          <p>Seasonal flu and routine vaccinations administered by trained healthcare staff.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">🧴</div>
+          <h3>Wellness &amp; Personal Care</h3>
+          <p>Vitamins, supplements, skincare and baby care products from trusted brands.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">📋</div>
+          <h3>Medication Counselling</h3>
+          <p>Understand dosage, side effects and drug interactions with one-on-one guidance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section id="products">
+    <div class="container">
+      <div class="section-title">
+        <h2>Popular Products</h2>
+        <p>Top-selling health essentials at the best prices</p>
+      </div>
+      <div class="products-grid">
+        <div class="product-card">
+          <span class="badge">20% OFF</span>
+          <div class="product-img">💊</div>
+          <div class="product-info">
+            <h4>Paracetamol 500mg</h4>
+            <p class="category">Pain &amp; Fever</p>
+            <div class="price">₹32 <del>₹40</del></div>
+            <a href="#contact" class="btn">Add to Cart</a>
+          </div>
+        </div>
+        <div class="product-card">
+          <span class="badge">NEW</span>
+          <div class="product-img">🍊</div>
+          <div class="product-info">
+            <h4>Vitamin C Tablets</h4>
+            <p class="category">Immunity</p>
+            <div class="price">₹199 <del>₹250</del></div>
+            <a href="#contact" class="btn">Add to Cart</a>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img">🧴</div>
+          <div class="product-info">
+            <h4>Hand Sanitizer 500ml</h4>
+            <p class="category">Hygiene</p>
+            <div class="price">₹149</div>
+            <a href="#contact" class="btn">Add to Cart</a>
+          </div>
+        </div>
+        <div class="product-card">
+          <span class="badge">15% OFF</span>
+          <div class="product-img">🌡️</div>
+          <div class="product-info">
+            <h4>Digital Thermometer</h4>
+            <p class="category">Health Devices</p>
+            <div class="price">₹255 <del>₹300</del></div>
+            <a href="#contact" class="btn">Add to Cart</a>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img">🩹</div>
+          <div class="product-info">
+            <h4>First Aid Kit</h4>
+            <p class="category">Emergency Care</p>
+            <div class="price">₹399</div>
+            <a href="#contact" class="btn">Add to Cart</a>
+          </div>
+        </div>
+        <div class="product-card">
+          <span class="badge">BEST SELLER</span>
+          <div class="product-img">😷</div>
+          <div class="product-info">
+            <h4>Surgical Masks (Pack of 50)</h4>
+            <p class="category">Protection</p>
+            <div class="price">₹120 <del>₹160</del></div>
+            <a href="#contact" class="btn">Add to Cart</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Offer Banner -->
+  <section class="offer">
+    <div class="container">
+      <h2>Get 25% Off Your First Order!</h2>
+      <p>Use code <strong>MEDI25</strong> at checkout. Valid for new customers only.</p>
+      <a href="#products" class="btn">Claim Offer</a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container about-grid">
+      <div class="about-img">🏥</div>
+      <div class="about-text">
+        <h2>About MediCare Pharmacy</h2>
+        <p>For over 15 years, MediCare Pharmacy has been serving the community with reliable medicines and caring advice. Our mission is to make quality healthcare affordable and accessible to everyone.</p>
+        <p>Our team of registered pharmacists is dedicated to ensuring every prescription is handled with accuracy and every customer feels cared for.</p>
+        <ul>
+          <li>Licensed &amp; registered pharmacists</li>
+          <li>Wide range of branded and generic medicines</li>
+          <li>Affordable prices and regular discounts</li>
+          <li>Safe storage and quality-checked products</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats">
+    <div class="container stats-grid">
+      <div><h3>15+</h3><p>Years of Service</p></div>
+      <div><h3>25,000+</h3><p>Happy Customers</p></div>
+      <div><h3>5,000+</h3><p>Products Available</p></div>
+      <div><h3>12</h3><p>Expert Pharmacists</p></div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-title">
+        <h2>What Our Customers Say</h2>
+        <p>Trusted by thousands of families</p>
+      </div>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="stars">★★★★★</div>
+          <p>"Super quick delivery and the pharmacist explained all my father's medicines clearly. Highly recommended!"</p>
+          <h5>— Ananya R.</h5>
+        </div>
+        <div class="testi-card">
+          <div class="stars">★★★★★</div>
+          <p>"Genuine products at fair prices. The staff is friendly and always ready to help."</p>
+          <h5>— Rahul K.</h5>
+        </div>
+        <div class="testi-card">
+          <div class="stars">★★★★☆</div>
+          <p>"I love the free health check-ups. Very convenient and professional service."</p>
+          <h5>— Meena S.</h5>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-title">
+        <h2>Contact Us</h2>
+        <p>Have a question or want to place an order? Reach out!</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3>Visit Our Store</h3>
+          <ul>
+            <li><strong>📍 Address:</strong><br>123 Health Street, Bengaluru, Karnataka – 560064</li>
+            <li><strong>📞 Phone:</strong><br>+91 98765 43210</li>
+            <li><strong>✉️ Email:</strong><br>support@medicarepharmacy.com</li>
+            <li><strong>🕘 Hours:</strong><br>Mon – Sun: 8:00 AM – 10:00 PM</li>
+          </ul>
+        </div>
+
+        <form action="#" method="post">
+          <input type="text" name="name" placeholder="Your Full Name" required>
+          <input type="email" name="email" placeholder="Your Email" required>
+          <input type="tel" name="phone" placeholder="Phone Number">
+          <select name="subject">
+            <option value="">Select a Subject</option>
+            <option>Place an Order</option>
+            <option>Prescription Query</option>
+            <option>Home Delivery</option>
+            <option>General Enquiry</option>
+          </select>
+          <textarea name="message" placeholder="Your Message"></textarea>
+          <button type="submit" class="btn">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>MediCare Pharmacy</h4>
+          <p>Your trusted neighbourhood pharmacy, caring for your health every day.</p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#about">About Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Categories</h4>
+          <ul>
+            <li><a href="#products">Medicines</a></li>
+            <li><a href="#products">Vitamins</a></li>
+            <li><a href="#products">Personal Care</a></li>
+            <li><a href="#products">Health Devices</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Follow Us</h4>
+          <ul>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Twitter</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        &copy; 2026 MediCare Pharmacy. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
